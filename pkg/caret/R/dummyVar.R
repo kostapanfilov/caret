@@ -223,8 +223,8 @@ predict.dummyVars <- function(object, newdata, na.action = na.pass, ...)
     options(contrasts = newContr)
     on.exit(options(contrasts = oldContr))
   }
-  #m <- model.frame(Terms, newdata, na.action = na.action, xlev = object$lvls)
-  m <- newdata
+  m <- model.frame(Terms, newdata, na.action = na.action, xlev = object$lvls)
+  #m <- newdata
   adv.args = list(...)
   sparse = ifelse(is.null(adv.args$sparse), FALSE, adv.args$sparse)
   if(sparse){    
