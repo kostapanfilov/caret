@@ -225,7 +225,7 @@ predict.dummyVars <- function(object, newdata, na.action = na.pass, ...)
   }
   
   xlev = sapply(X = names(object$lvls),FUN = function(name){
-    union(levels(newdata[[name]]), object$lvls[[name]]
+    union(levels(newdata[[name]]), object$lvls[[name]])
           },simplify = F, USE.NAMES = T)
 
   m <- model.frame(Terms, newdata, na.action = na.action, xlev = xlev)
