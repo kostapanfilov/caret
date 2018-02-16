@@ -223,7 +223,12 @@ predict.dummyVars <- function(object, newdata, na.action = na.pass, ...)
     options(contrasts = newContr)
     on.exit(options(contrasts = oldContr))
   }
-  m <- model.frame(Terms, newdata, na.action = na.action, xlev = object$lvls)
+  
+  xlev = sapply(X = names(object$lvls),FUN = function(name){
+    union(levels(newdata[[name]]), object$lvls[[name]]
+          },simplify = F, USE.NAMES = T)
+
+  m <- model.frame(Terms, newdata, na.action = na.action, xlev = xlev)
   #m <- newdata
   adv.args = list(...)
   sparse = ifelse(is.null(adv.args$sparse), FALSE, adv.args$sparse)
