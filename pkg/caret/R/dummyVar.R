@@ -225,7 +225,12 @@ predict.dummyVars <- function(object, newdata, na.action = na.pass, ...)
   }
   m <- model.frame(Terms, newdata, na.action = na.action, xlev = object$lvls)
   
-  x <- model.matrix(Terms, m)
+  if(sparse){    
+    x <- sparse.model.matrix(Terms, m)
+  }else{
+    x <- model.matrix(Terms, m)
+  }
+    
   
   if(object$levelsOnly) {
     for(i in object$facVars) {
